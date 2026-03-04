@@ -26,7 +26,7 @@ export const DonationForm = ({users, churches}) => {
       if(res.ok) {
         alert("success")
       } else {
-            res.json().then((data) => console.log("Validation errors:", data));
+        res.json().then((data) => console.log("Validation errors:", data));
 
         alert("error" + res.status)
       }

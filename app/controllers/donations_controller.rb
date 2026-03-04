@@ -10,14 +10,22 @@ class DonationsController < ApplicationController
   def show
   end
 
+  def donation_summary
+    @total_donation = Donation.sum(:amount)
+    @by_church = Donation.group_by(:church_id).sum(:amount)
+  end
+
   # GET /donations/new
   def new
     @users = User.all
     @churches = Church.all
+    @donations = Donation.includes(:user, :church).all.order_by(created_at: asc)
   end
 
   # GET /donations/1/edit
   def edit
+    @users = User.all
+    @churches = Church.all
   end
 
   # POST /donations or /donations.json
@@ -61,7 +69,7 @@ class DonationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_donation
-      @donation = Donation.find(params[:id])
+      @donation = Donation.includes(:user, :church).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

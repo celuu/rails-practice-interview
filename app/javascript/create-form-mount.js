@@ -10,6 +10,6 @@ document.addEventListener("turbo:load", () => {
     const donation = JSON.parse(form.dataset.donation)
 
     const root = ReactDOM.createRoot(form)
-    root.render(<DonationForm users={users} churches={churches} donation={donation} />)
+    root.render(<DonationForm users={users} churches={churches} />)
   }
 })

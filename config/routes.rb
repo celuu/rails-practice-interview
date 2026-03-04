@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :donations
+  resources :donations do
+    get :donation_summary, on: :collection
+  end
   resources :churches
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
