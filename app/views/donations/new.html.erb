@@ -1,0 +1,18 @@
+<h1>New donation</h1>
+   <% if @donation&.errors&.any? %>
+     <div style="color: red">
+       <h2><%= pluralize(@donation.errors.count, "error") %> prohibited this donation from being saved:</h2>
+       <ul>
+         <% @donation.errors.each do |error| %>
+           <li><%= error.full_message %></li>
+         <% end %>
+       </ul>
+     </div>
+   <% end %>
+<%= tag.div id: "create-form", data: {users: @users.to_json, churches: @churches.to_json, donation: @donation.to_json} %>
+
+<br>
+
+<div>
+  <%= link_to "Back to donations", donations_path %>
+</div>
