@@ -19,7 +19,9 @@ class DonationsController < ApplicationController
   def new
     @users = User.all
     @churches = Church.all
-    @donations = Donation.includes(:user, :church).all.order_by(created_at: asc)
+    @donations = Donation.includes(:user, :church).order(created_at: :desc)
+    @total_donation = Donation.sum(:amount)
+    @by_church = Donation.joins(:church).group('churches.name').sum(:amount)
   end
 
   # GET /donations/1/edit
