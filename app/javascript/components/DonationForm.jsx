@@ -23,13 +23,12 @@ export const DonationForm = ({users, churches}) => {
       })
     })
     .then((res) => {
-      if(res.ok) {
-        alert("success")
-      } else {
-        res.json().then((data) => console.log("Validation errors:", data));
-
-        alert("error" + res.status)
+      if (!res.ok) {
+        return res.json().then((data) => {
+          throw new Error(data.errors?.join(", ") || "An error occurred");
+        });
       }
+      return res.json();
     })
     .catch((err) => {
       if (err) {
